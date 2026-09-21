@@ -1,0 +1,1 @@
+public class Ex52_PerfectNumber { public static void main(String[] args){int number=28,sum=0;for(int divisor=1;divisor<number;divisor++)if(number%divisor==0)sum+=divisor;System.out.println(sum==number);} }

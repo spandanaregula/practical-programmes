@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Forms and Validation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #174EA6;
+        }
+
+        p.intro {
+            text-align: center;
+            color: #555;
+        }
+
+        form {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #174EA6;
+        }
+
+        input,
+        select,
+        textarea {
+            display: block;
+            width: 90%;
+            max-width: 500px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        meter {
+            width: 200px;
+            margin: 5px 0;
+        }
+
+        .message {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        .valid {
+            color: #16a34a;
+        }
+
+        .home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .home a {
+            color: #174EA6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home a:hover {
+            color: #F4B400;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Forms and Validation</h1>
+
+    <p class="intro">
+        JavaScript Forms and Validation Practical Programs
+    </p>
+
+
+    <form id="registration">
+
+        <h2>1. Student Registration</h2>
+
+        <input
+            name="name"
+            placeholder="Full name">
+
+        <input
+            name="email"
+            type="email"
+            placeholder="Email">
+
+        <input
+            name="phone"
+            placeholder="10-digit phone">
+
+        <input
+            name="password"
+            type="password"
+            placeholder="Password">
+
+        <button type="submit">
+            Register
+        </button>
+
+        <p class="message"></p>
+
+    </form>
+
+
+    <form id="login">
+
+        <h2>2. Login</h2>
+
+        <input
+            name="username"
+            placeholder="Username">
+
+        <input
+            name="password"
+            type="password"
+            placeholder="Password">
+
+        <button type="submit">
+            Login
+        </button>
+
+        <p class="message"></p>
+
+    </form>
+
+
+    <form id="signup">
+
+        <h2>3. Signup and Password Strength</h2>
+
+        <input
+            name="email"
+            type="email"
+            placeholder="Email">
+
+        <input
+            id="signupPassword"
+            name="password"
+            type="password"
+            placeholder="Password">
+
+        <meter
+            id="strength"
+            min="0"
+            max="4"
+            value="0">
+        </meter>
+
+        <input
+            name="confirm"
+            type="password"
+            placeholder="Confirm password">
+
+        <button type="submit">
+            Sign up
+        </button>
+
+        <p class="message"></p>
+
+    </form>
+
+
+    <form id="feedback">
+
+        <h2>4. Feedback</h2>
+
+        <input
+            name="name"
+            placeholder="Name">
+
+        <select name="rating">
+
+            <option value="">
+                Rating
+            </option>
+
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+
+        </select>
+
+        <textarea
+            name="comment"
+            placeholder="Comment">
+        </textarea>
+
+        <button type="submit">
+            Send feedback
+        </button>
+
+        <p class="message"></p>
+
+    </form>
+
+
+    <form id="admission">
+
+        <h2>5. College Admission</h2>
+
+        <input
+            name="name"
+            placeholder="Applicant name">
+
+        <input
+            name="marks"
+            type="number"
+            min="0"
+            max="100"
+            placeholder="Marks">
+
+        <select name="course">
+
+            <option value="">
+                Choose course
+            </option>
+
+            <option>
+                Computer Science
+            </option>
+
+            <option>
+                Design
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Apply
+        </button>
+
+        <p class="message"></p>
+
+    </form>
+
+
+    <div class="home">
+
+        <a href="../index.html">
+            ← Back to JavaScript Programs
+        </a>
+
+    </div>
+
+
+    <script>
+
+        function validate(form) {
+
+            const values = new FormData(form);
+            const errors = [];
+
+
+            // Required field validation
+
+            for (const [name, value] of values) {
+
+                if (!String(value).trim()) {
+                    errors.push(`${name} is required`);
+                }
+
+            }
+
+
+            // Email validation
+
+            if (
+                values.get('email') &&
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                    values.get('email')
+                )
+            ) {
+
+                errors.push('Email is invalid');
+
+            }
+
+
+            // Phone validation
+
+            if (
+                values.get('phone') &&
+                !/^\d{10}$/.test(
+                    values.get('phone')
+                )
+            ) {
+
+                errors.push(
+                    'Phone must contain 10 digits'
+                );
+
+            }
+
+
+            // Password validation
+
+            if (
+                values.get('password') &&
+                values.get('password').length < 8
+            ) {
+
+                errors.push(
+                    'Password must have 8 characters'
+                );
+
+            }
+
+
+            // Confirm password
+
+            if (
+                form.id === 'signup' &&
+                values.get('password') !==
+                values.get('confirm')
+            ) {
+
+                errors.push(
+                    'Passwords do not match'
+                );
+
+            }
+
+
+            // Admission marks
+
+            if (
+                form.id === 'admission' &&
+                Number(values.get('marks')) < 40
+            ) {
+
+                errors.push(
+                    'Marks must be at least 40'
+                );
+
+            }
+
+
+            const message =
+                form.querySelector('.message');
+
+
+            if (errors.length) {
+
+                message.textContent =
+                    errors.join('. ');
+
+                message.className =
+                    'message error';
+
+            } else {
+
+                message.textContent =
+                    'Submitted successfully';
+
+                message.className =
+                    'message valid';
+
+            }
+
+        }
+
+
+        // Form submission
+
+        document
+            .querySelectorAll('form')
+            .forEach(form => {
+
+                form.onsubmit = event => {
+
+                    event.preventDefault();
+
+                    validate(form);
+
+                };
+
+            });
+
+
+        // Password strength
+
+        signupPassword.oninput = () => {
+
+            const value =
+                signupPassword.value;
+
+            strength.value =
+                (/[a-z]/.test(value) ? 1 : 0) +
+                (/[A-Z]/.test(value) ? 1 : 0) +
+                (/\d/.test(value) ? 1 : 0) +
+                (value.length >= 8 ? 1 : 0);
+
+        };
+
+    </script>
+
+</body>
+
+</html>

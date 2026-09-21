@@ -1,0 +1,1 @@
+public class Ex14_ArraySumAverage { public static void main(String[] args){int[] values={10,20,30,40},sum=values[0];for(int i=1;i<values.length;i++)sum+=values[i];System.out.println("Sum: "+sum+", average: "+(double)sum/values.length);} }

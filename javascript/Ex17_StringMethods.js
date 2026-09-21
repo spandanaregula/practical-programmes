@@ -1,0 +1,1 @@
+public class Ex17_StringMethods { public static void main(String[] args){String text="Java makes pages interactive";System.out.println(text.length());System.out.println(text.toUpperCase());System.out.println(text.contains("pages"));System.out.println(text.replace("interactive","useful"));} }

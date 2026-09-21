@@ -1,0 +1,1 @@
+public class Ex35_Stopwatch { public static void main(String[] args)throws InterruptedException{long start=System.currentTimeMillis();Thread.sleep(100);System.out.println("Elapsed: "+(System.currentTimeMillis()-start)+" ms");} }

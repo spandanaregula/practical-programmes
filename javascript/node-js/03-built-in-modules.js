@@ -1,0 +1,1 @@
+const path=require('node:path');const os=require('node:os');const url=require('node:url');console.log({base:path.basename(__filename),platform:os.platform(),parsed:url.parse('https://example.com/path').pathname});

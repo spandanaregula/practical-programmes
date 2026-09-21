@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JavaScript Mini Projects</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #174EA6;
+        }
+
+        p.intro {
+            text-align: center;
+            color: #555;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #174EA6;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        textarea {
+            width: 90%;
+            max-width: 600px;
+            height: 100px;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        output {
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        pre {
+            background-color: #f1f5f9;
+            padding: 15px;
+            white-space: pre-wrap;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+        }
+
+        .home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .home a {
+            color: #174EA6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home a:hover {
+            color: #F4B400;
+            text-decoration: underline;
+        }
+
+        body.dark {
+            background-color: #202124;
+            color: white;
+        }
+
+        body.dark section {
+            background-color: #303134;
+        }
+
+        body.dark h2 {
+            color: #F4B400;
+        }
+
+        body.dark pre {
+            background-color: #202124;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>JavaScript Mini Projects</h1>
+
+    <p class="intro">
+        Interactive JavaScript Mini Projects
+    </p>
+
+    <section>
+
+        <h2>1. Calculator</h2>
+
+        <input id="calcA" type="number" value="8">
+
+        <select id="calcOp">
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select>
+
+        <input id="calcB" type="number" value="2">
+
+        <button id="calculate">
+            Calculate
+        </button>
+
+        <output id="calcResult"></output>
+
+    </section>
+
+    <section>
+
+        <h2>2. Clock, Stopwatch and Countdown</h2>
+
+        <output id="clock"></output>
+
+        <br>
+
+        <button id="startWatch">
+            Start stopwatch
+        </button>
+
+        <button id="stopWatch">
+            Stop
+        </button>
+
+        <button id="resetWatch">
+            Reset
+        </button>
+
+        <output id="watch">0</output>
+
+        <br>
+
+        <input id="countInput" type="number" value="5">
+
+        <button id="startCount">
+            Countdown
+        </button>
+
+        <output id="countOutput"></output>
+
+    </section>
+
+    <section>
+
+        <h2>3. To-do List and Notes</h2>
+
+        <input id="todoInput" placeholder="Task">
+
+        <button id="addTodo">
+            Add
+        </button>
+
+        <ul id="todos"></ul>
+
+        <textarea id="notes"
+            placeholder="Notes saved to localStorage"></textarea>
+
+        <br>
+
+        <button id="saveNotes">
+            Save notes
+        </button>
+
+    </section>
+
+    <section>
+
+        <h2>4. Weather and Currency API</h2>
+
+        <button id="weather">
+            Load sample weather
+        </button>
+
+        <button id="currency">
+            Load sample exchange rate
+        </button>
+
+        <pre id="apiResult"></pre>
+
+    </section>
+
+    <section>
+
+        <h2>5. Quiz and Guessing Game</h2>
+
+        <p>
+            Which language runs in a browser?
+        </p>
+
+        <button data-answer="HTML">
+            HTML
+        </button>
+
+        <button data-answer="JavaScript">
+            JavaScript
+        </button>
+
+        <p id="quizResult"></p>
+
+        <input id="guessInput"
+            type="number"
+            min="1"
+            max="10">
+
+        <button id="guessButton">
+            Guess 1-10
+        </button>
+
+        <p id="guessResult"></p>
+
+    </section>
+
+    <section>
+
+        <h2>6. Tic-Tac-Toe</h2>
+
+        <div class="board" id="board"></div>
+
+        <p id="gameResult"></p>
+
+    </section>
+
+    <section>
+
+        <h2>7. Expense, Marks, Cart, Password and BMI</h2>
+
+        <input id="expense"
+            type="number"
+            placeholder="Expense">
+
+        <button id="addExpense">
+            Add expense
+        </button>
+
+        <output id="expenseTotal">$0</output>
+
+        <br>
+
+        <input id="marks"
+            placeholder="Marks: 80,70,90">
+
+        <button id="grade">
+            Grade
+        </button>
+
+        <output id="gradeResult"></output>
+
+        <br>
+
+        <button data-item="Book">
+            Add Book
+        </button>
+
+        <button data-item="Pen">
+            Add Pen
+        </button>
+
+        <output id="cart"></output>
+
+        <br>
+
+        <button id="passwordButton">
+            Random password
+        </button>
+
+        <output id="randomPassword"></output>
+
+        <br>
+
+        <input id="weight"
+            type="number"
+            placeholder="kg">
+
+        <input id="height"
+            type="number"
+            placeholder="m">
+
+        <button id="bmi">
+            BMI
+        </button>
+
+        <output id="bmiResult"></output>
+
+    </section>
+
+    <section>
+
+        <h2>8. Interactive Portfolio</h2>
+
+        <button id="themeButton">
+            Toggle theme
+        </button>
+
+        <p>
+            Welcome to my interactive portfolio.
+            Explore the projects above.
+        </p>
+
+    </section>
+
+    <div class="home">
+
+        <a href="../index.html">
+            ← Back to JavaScript Programs
+        </a>
+
+    </div>
+
+    <script>
+
+        // Shortcut function
+
+        const $ = id => document.getElementById(id);
+
+
+        // Digital clock
+
+        setInterval(() => {
+
+            $('clock').textContent =
+                new Date().toLocaleTimeString();
+
+        }, 1000);
+
+
+        // Calculator
+
+        $('calculate').onclick = () => {
+
+            const a = +$('calcA').value;
+            const b = +$('calcB').value;
+            const o = $('calcOp').value;
+
+            let result;
+
+            if (o === '+') {
+                result = a + b;
+            } else if (o === '-') {
+                result = a - b;
+            } else if (o === '*') {
+                result = a * b;
+            } else {
+                result = a / b;
+            }
+
+            $('calcResult').value = result;
+
+        };
+
+
+        // Stopwatch
+
+        let watchSeconds = 0;
+        let watchTimer = null;
+
+        startWatch.onclick = () => {
+
+            if (watchTimer === null) {
+
+                watchTimer = setInterval(() => {
+
+                    watchSeconds += 0.1;
+
+                    watch.value =
+                        watchSeconds.toFixed(1);
+
+                }, 100);
+
+            }
+
+        };
+
+        stopWatch.onclick = () => {
+
+            clearInterval(watchTimer);
+
+            watchTimer = null;
+
+        };
+
+        resetWatch.onclick = () => {
+
+            watchSeconds = 0;
+
+            watch.value = '0';
+
+        };
+
+
+        // Countdown
+
+        startCount.onclick = () => {
+
+            let n = +$('countInput').value;
+
+            countOutput.value = n;
+
+            const timer = setInterval(() => {
+
+                n--;
+
+                countOutput.value = n;
+
+                if (n <= 0) {
+                    clearInterval(timer);
+                }
+
+            }, 1000);
+
+        };
+
+
+        // To-do list
+
+        let todos =
+            JSON.parse(
+                localStorage.getItem('todos') || '[]'
+            );
+
+        const todosEl = $('todos');
+
+        function renderTodos() {
+
+            todosEl.innerHTML = '';
+
+            todos.forEach((todo, i) => {
+
+                const li = document.createElement('li');
+
+                li.textContent = todo + ' ';
+
+                const button =
+                    document.createElement('button');
+
+                button.textContent = 'x';
+
+                button.dataset.remove = i;
+
+                li.appendChild(button);
+
+                todosEl.appendChild(li);
+
+            });
+
+        }
+
+
+        addTodo.onclick = () => {
+
+            if (todoInput.value.trim()) {
+
+                todos.push(todoInput.value);
+
+                localStorage.setItem(
+                    'todos',
+                    JSON.stringify(todos)
+                );
+
+                todoInput.value = '';
+
+                renderTodos();
+
+            }
+
+        };
+
+
+        todos.onclick = event => {
+
+            if (event.target.dataset.remove) {
+
+                todos.splice(
+                    Number(event.target.dataset.remove),
+                    1
+                );
+
+                localStorage.setItem(
+                    'todos',
+                    JSON.stringify(todos)
+                );
+
+                renderTodos();
+
+            }
+
+        };
+
+
+        renderTodos();
+
+
+        // Notes
+
+        notes.value =
+            localStorage.getItem('notes') || '';
+
+        saveNotes.onclick = () => {
+
+            localStorage.setItem(
+                'notes',
+                notes.value
+            );
+
+        };
+
+
+        // Weather API
+
+        weather.onclick = () => {
+
+            fetch(
+                'https://api.open-meteo.com/v1/forecast?latitude=28.6&longitude=77.2&current=temperature_2m'
+            )
+                .then(response => response.json())
+                .then(data => {
+
+                    apiResult.textContent =
+                        JSON.stringify(
+                            data.current,
+                            null,
+                            2
+                        );
+
+                })
+                .catch(() => {
+
+                    apiResult.textContent =
+                        'Weather API unavailable';
+
+                });
+
+        };
+
+
+        // Currency API
+
+        currency.onclick = () => {
+
+            fetch(
+                'https://open.er-api.com/v6/latest/USD'
+            )
+                .then(response => response.json())
+                .then(data => {
+
+                    apiResult.textContent =
+                        'USD to EUR: ' +
+                        data.rates.EUR;
+
+                })
+                .catch(() => {
+
+                    apiResult.textContent =
+                        'Currency API unavailable';
+
+                });
+
+        };
+
+
+        // Quiz
+
+        document
+            .querySelectorAll('[data-answer]')
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    if (
+                        button.dataset.answer ===
+                        'JavaScript'
+                    ) {
+
+                        quizResult.textContent =
+                            'Correct!';
+
+                    } else {
+
+                        quizResult.textContent =
+                            'Try again';
+
+                    }
+
+                };
+
+            });
+
+
+        // Guessing game
+
+        const target =
+            Math.floor(Math.random() * 10) + 1;
+
+        guessButton.onclick = () => {
+
+            if (+guessInput.value === target) {
+
+                guessResult.textContent =
+                    'Correct!';
+
+            } else {
+
+                guessResult.textContent =
+                    'Try again. Number was ' + target;
+
+            }
+
+        };
+
+
+        // Tic-Tac-Toe
+
+        let boardState =
+            Array(9).fill('');
+
+        let turn = 'X';
+
+        board.innerHTML = '';
+
+        boardState.forEach((item, i) => {
+
+            const button =
+                document.createElement('button');
+
+            button.className = 'cell';
+
+            button.dataset.cell = i;
+
+            board.appendChild(button);
+
+        });
+
+
+        board.onclick = event => {
+
+            if (
+                event.target.dataset.cell !== undefined &&
+                !boardState[event.target.dataset.cell]
+            ) {
+
+                const index =
+                    event.target.dataset.cell;
+
+                boardState[index] = turn;
+
+                event.target.textContent = turn;
+
+                if (turn === 'X') {
+                    turn = 'O';
+                } else {
+                    turn = 'X';
+                }
+
+            }
+
+        };
+
+
+        // Expense tracker
+
+        let total = 0;
+
+        addExpense.onclick = () => {
+
+            total += +$('expense').value;
+
+            expenseTotal.value =
+                '$' + total;
+
+        };
+
+
+        // Marks and grade
+
+        grade.onclick = () => {
+
+            const marksList =
+                $('marks').value.split(',');
+
+            const average =
+                marksList.reduce(
+                    (a, n) => a + Number(n),
+                    0
+                ) / marksList.length;
+
+            if (average >= 90) {
+
+                gradeResult.value = 'A';
+
+            } else if (average >= 75) {
+
+                gradeResult.value = 'B';
+
+            } else if (average >= 60) {
+
+                gradeResult.value = 'C';
+
+            } else {
+
+                gradeResult.value = 'D';
+
+            }
+
+        };
+
+
+        // Shopping cart
+
+        let cartItems = [];
+
+        document
+            .querySelectorAll('[data-item]')
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    cartItems.push(
+                        button.dataset.item
+                    );
+
+                    cart.value =
+                        cartItems.join(', ');
+
+                };
+
+            });
+
+
+        // Random password
+
+        passwordButton.onclick = () => {
+
+            randomPassword.value =
+                Math.random()
+                    .toString(36)
+                    .slice(2, 10) +
+                '!A1';
+
+        };
+
+
+        // BMI calculator
+
+        bmi.onclick = () => {
+
+            const weight =
+                +$('weight').value;
+
+            const height =
+                +$('height').value;
+
+            bmiResult.value =
+                (weight / (height * height))
+                    .toFixed(2);
+
+        };
+
+
+        // Theme
+
+        themeButton.onclick = () => {
+
+            document.body.classList.toggle('dark');
+
+        };
+
+    </script>
+
+</body>
+
+</html>

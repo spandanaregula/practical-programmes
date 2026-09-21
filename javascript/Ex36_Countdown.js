@@ -1,0 +1,1 @@
+public class Ex36_Countdown { public static void main(String[] args)throws InterruptedException{for(int seconds=5;seconds>=0;seconds--){System.out.println(seconds);Thread.sleep(1000);}System.out.println("Time's up!");} }

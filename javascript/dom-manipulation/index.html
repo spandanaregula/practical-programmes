@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DOM Manipulation Lab</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #174EA6;
+        }
+
+        p.intro {
+            text-align: center;
+            color: #555;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #174EA6;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        input,
+        textarea,
+        select {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e8f0fe;
+        }
+
+        a {
+            color: #174EA6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #F4B400;
+            text-decoration: underline;
+        }
+
+        .home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .highlight {
+            background: #ffd166;
+            padding: 1rem;
+        }
+
+        .slide {
+            width: 300px;
+            height: 180px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DOM Manipulation Lab</h1>
+
+    <p class="intro">
+        JavaScript DOM Manipulation Practical Programs
+    </p>
+
+    <section>
+        <h2>1. Add and Remove Elements</h2>
+
+        <button id="addElement">Add element</button>
+        <button id="removeElement">Remove last</button>
+
+        <div id="elementArea"></div>
+    </section>
+
+    <section>
+        <h2>2. Change Styles and Multiple Elements</h2>
+
+        <button id="styleButton">Change styles</button>
+
+        <p class="multi">First paragraph</p>
+        <p class="multi">Second paragraph</p>
+    </section>
+
+    <section>
+        <h2>3. Selectors</h2>
+
+        <p id="byId">getElementById()</p>
+        <p class="byClass">getElementsByClassName()</p>
+        <p class="byClass">querySelectorAll()</p>
+
+        <button id="selectButton">Run selectors</button>
+
+        <output id="selectOutput"></output>
+    </section>
+
+    <section>
+        <h2>4. Dynamic Classes</h2>
+
+        <button id="classButton">Toggle highlight</button>
+
+        <p id="classTarget">
+            Class changes dynamically.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Dynamic Table, Rows and Filter</h2>
+
+        <input id="tableSearch" placeholder="Search records">
+
+        <button id="addRow">Add row</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody"></tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>6. Character Counter and Password</h2>
+
+        <textarea
+            id="text"
+            maxlength="100"
+            placeholder="Type here">
+        </textarea>
+
+        <span id="counter">0/100</span>
+
+        <br>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password">
+
+        <button id="showPassword">
+            Show / hide
+        </button>
+    </section>
+
+    <section>
+        <h2>7. Dependent Dropdown</h2>
+
+        <select id="country">
+            <option value="">Country</option>
+            <option>India</option>
+            <option>USA</option>
+        </select>
+
+        <select id="state">
+            <option value="">State</option>
+        </select>
+
+        <select id="city">
+            <option value="">City</option>
+        </select>
+    </section>
+
+    <section>
+        <h2>8. Slideshow</h2>
+
+        <img
+            id="slide"
+            class="slide"
+            src="https://picsum.photos/300/180?1"
+            alt="Slideshow">
+
+        <br>
+
+        <button id="previous">Previous</button>
+        <button id="next">Next</button>
+    </section>
+
+    <div class="home">
+        <a href="../index.html">← Back to JavaScript Programs</a>
+    </div>
+
+
+    <script>
+
+        const $ = selector => document.querySelector(selector);
+
+        let itemNumber = 0;
+
+        // Add and remove elements
+        $('#addElement').onclick = () => {
+            const item = document.createElement('p');
+
+            item.textContent = `New element ${++itemNumber}`;
+
+            $('#elementArea').append(item);
+        };
+
+        $('#removeElement').onclick = () =>
+            $('#elementArea').lastElementChild?.remove();
+
+
+        // Change styles
+        $('#styleButton').onclick = () => {
+            document.querySelectorAll('.multi')
+                .forEach((item, index) => {
+                    item.style.color =
+                        index ? '#b23a48' : '#176b87';
+
+                    item.style.fontWeight = 'bold';
+                });
+        };
+
+
+        // Selectors
+        $('#selectButton').onclick = () => {
+
+            $('#byId').style.background = '#ffd166';
+
+            Array.from(
+                document.getElementsByClassName('byClass')
+            ).forEach(item =>
+                item.style.padding = '.5rem'
+            );
+
+            document.querySelectorAll('.byClass')
+                .forEach(item =>
+                    item.style.borderLeft = '4px solid teal'
+                );
+
+            $('#selectOutput').textContent =
+                'Selectors executed.';
+        };
+
+
+        // Dynamic classes
+        $('#classButton').onclick = () =>
+            $('#classTarget').classList.toggle('highlight');
+
+
+        // Dynamic table
+        let rows = [
+            ['Asha', 'Web'],
+            ['Ben', 'Design'],
+            ['Chen', 'Data']
+        ];
+
+        function renderRows() {
+
+            const search =
+                $('#tableSearch').value.toLowerCase();
+
+            $('#tableBody').innerHTML = '';
+
+            rows.forEach((row, index) => {
+
+                if (row.join(' ')
+                    .toLowerCase()
+                    .includes(search)) {
+
+                    $('#tableBody').insertAdjacentHTML(
+                        'beforeend',
+
+                        `<tr>
+                            <td>${row[0]}</td>
+                            <td>${row[1]}</td>
+                            <td>
+                                <button data-delete="${index}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>`
+                    );
+                }
+            });
+        }
+
+        $('#addRow').onclick = () => {
+
+            rows.push([
+                `Student ${rows.length + 1}`,
+                'New course'
+            ]);
+
+            renderRows();
+        };
+
+        $('#tableSearch').oninput = renderRows;
+
+        $('#tableBody').onclick = event => {
+
+            if (event.target.dataset.delete) {
+
+                rows.splice(
+                    Number(event.target.dataset.delete),
+                    1
+                );
+
+                renderRows();
+            }
+        };
+
+        renderRows();
+
+
+        // Character counter
+        $('#text').oninput = event => {
+
+            $('#counter').textContent =
+                `${event.target.value.length}/100`;
+        };
+
+
+        // Show / hide password
+        $('#showPassword').onclick = () => {
+
+            $('#password').type =
+                $('#password').type === 'password'
+                    ? 'text'
+                    : 'password';
+        };
+
+
+        // Dependent dropdown
+        const data = {
+
+            India: {
+                Maharashtra: ['Mumbai', 'Pune'],
+                Karnataka: ['Bengaluru', 'Mysuru']
+            },
+
+            USA: {
+                California: ['Los Angeles', 'San Diego'],
+                Texas: ['Austin', 'Dallas']
+            }
+        };
+
+        $('#country').onchange = () => {
+
+            const states =
+                Object.keys(
+                    data[$('#country').value] || {}
+                );
+
+            $('#state').innerHTML =
+                '<option>State</option>' +
+                states.map(value =>
+                    `<option>${value}</option>`
+                ).join('');
+
+            $('#city').innerHTML =
+                '<option>City</option>';
+        };
+
+        $('#state').onchange = () => {
+
+            const cities =
+                data[$('#country').value]?.[
+                    $('#state').value
+                ] || [];
+
+            $('#city').innerHTML =
+                '<option>City</option>' +
+                cities.map(value =>
+                    `<option>${value}</option>`
+                ).join('');
+        };
+
+
+        // Slideshow
+        let slideIndex = 1;
+
+        function showSlide() {
+
+            $('#slide').src =
+                `https://picsum.photos/300/180?${slideIndex}`;
+        }
+
+        $('#next').onclick = () => {
+
+            slideIndex =
+                slideIndex % 3 + 1;
+
+            showSlide();
+        };
+
+        $('#previous').onclick = () => {
+
+            slideIndex =
+                slideIndex === 1
+                    ? 3
+                    : slideIndex - 1;
+
+            showSlide();
+        };
+
+    </script>
+
+</body>
+</html>

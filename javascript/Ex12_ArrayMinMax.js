@@ -1,0 +1,1 @@
+public class Ex12_ArrayMinMax { public static void main(String[] args){int[] values={9,4,17,2,11};int min=values[0],max=values[0];for(int value:values){min=Math.min(min,value);max=Math.max(max,value);}System.out.println("Smallest: "+min+", largest: "+max);} }

@@ -1,0 +1,1 @@
+public class Ex63_VowelsConsonants { public static void main(String[] args){String text="JavaScript".toLowerCase();int vowels=0,consonants=0;for(char letter:text.toCharArray())if(Character.isLetter(letter)){if("aeiou".indexOf(letter)>=0)vowels++;else consonants++;}System.out.println("Vowels: "+vowels+", consonants: "+consonants);} }

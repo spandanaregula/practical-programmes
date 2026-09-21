@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Events Lab</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #174EA6;
+        }
+
+        p.intro {
+            text-align: center;
+            color: #555;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #174EA6;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        #drag {
+            padding: 1rem;
+            background: #ffd166;
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        #drop {
+            padding: 2rem;
+            border: 2px dashed #264653;
+        }
+
+        #game {
+            height: 180px;
+            background-color: #eef7f2;
+            position: relative;
+            margin-top: 15px;
+        }
+
+        .player {
+            position: absolute;
+            font-size: 2rem;
+        }
+
+        .home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .home a {
+            color: #174EA6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home a:hover {
+            color: #F4B400;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Events Experiments</h1>
+
+    <p class="intro">
+        JavaScript Events Practical Programs
+    </p>
+
+
+    <section>
+
+        <h2>1. Mouse Events</h2>
+
+        <button id="mouse">
+            Hover, click, or double-click
+        </button>
+
+        <p id="mouseResult"></p>
+
+    </section>
+
+
+    <section>
+
+        <h2>2. Keyboard Events and Game</h2>
+
+        <input
+            id="keyboard"
+            placeholder="Type here">
+
+        <p id="keyResult"></p>
+
+        <div id="game">
+            <span id="player" class="player">●</span>
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <h2>3. Form Events</h2>
+
+        <form id="eventForm">
+
+            <input
+                id="eventInput"
+                placeholder="Focus and change me">
+
+            <button type="submit">
+                Submit
+            </button>
+
+        </form>
+
+        <p id="formResult"></p>
+
+    </section>
+
+
+    <section>
+
+        <h2>4. Bubbling, Capturing and Delegation</h2>
+
+        <div id="outer">
+
+            <button id="inner">
+                Bubbling button
+            </button>
+
+        </div>
+
+        <ul id="delegated">
+            <li>Delegated item 1</li>
+            <li>Delegated item 2</li>
+        </ul>
+
+        <p id="eventLog"></p>
+
+    </section>
+
+
+    <section>
+
+        <h2>5. Drag and Drop</h2>
+
+        <div id="drag" draggable="true">
+            Drag me
+        </div>
+
+        <div id="drop">
+            Drop here
+        </div>
+
+    </section>
+
+
+    <div class="home">
+
+        <a href="../index.html">
+            ← Back to JavaScript Programs
+        </a>
+
+    </div>
+
+
+    <script>
+
+        const log = message =>
+            document.querySelector('#eventLog').textContent = message;
+
+
+        // Mouse events
+
+        const mouse = document.querySelector('#mouse');
+
+        mouse.onmouseenter = () =>
+            mouseResult.textContent = 'Mouse entered';
+
+        mouse.onclick = () =>
+            mouseResult.textContent = 'Clicked';
+
+        mouse.ondblclick = () =>
+            mouseResult.textContent = 'Double-clicked';
+
+
+        // Keyboard events
+
+        keyboard.onkeydown = event =>
+            keyResult.textContent = `Key down: ${event.key}`;
+
+        keyboard.onkeyup = event =>
+            keyResult.textContent = `Key up: ${event.key}`;
+
+
+        // Form events
+
+        eventInput.onfocus = () =>
+            formResult.textContent = 'Input focused';
+
+        eventInput.onblur = () =>
+            formResult.textContent = 'Input blurred';
+
+        eventInput.onchange = () =>
+            formResult.textContent = 'Input changed';
+
+        eventForm.onsubmit = event => {
+
+            event.preventDefault();
+
+            formResult.textContent =
+                'Form submitted without reload';
+        };
+
+
+        // Bubbling and capturing
+
+        outer.addEventListener(
+            'click',
+            () => log('Outer bubble listener'),
+            false
+        );
+
+        outer.addEventListener(
+            'click',
+            () => log('Outer capture listener'),
+            true
+        );
+
+        inner.onclick = () =>
+            log('Inner listener');
+
+
+        // Event delegation
+
+        delegated.onclick = event => {
+
+            if (event.target.matches('li')) {
+                event.target.remove();
+            }
+
+        };
+
+
+        // Keyboard-controlled game
+
+        let x = 0;
+        let y = 0;
+
+        document.onkeydown = event => {
+
+            if (
+                ['ArrowRight', 'ArrowLeft',
+                 'ArrowUp', 'ArrowDown']
+                .includes(event.key)
+            ) {
+
+                if (event.key === 'ArrowRight')
+                    x += 10;
+
+                if (event.key === 'ArrowLeft')
+                    x -= 10;
+
+                if (event.key === 'ArrowUp')
+                    y -= 10;
+
+                if (event.key === 'ArrowDown')
+                    y += 10;
+
+                player.style.transform =
+                    `translate(${x}px, ${y}px)`;
+            }
+
+        };
+
+
+        // Drag and drop
+
+        drag.ondragstart = event => {
+
+            event.dataTransfer.setData(
+                'text/plain',
+                'drag'
+            );
+
+        };
+
+
+        drop.ondragover = event =>
+            event.preventDefault();
+
+
+        drop.ondrop = event => {
+
+            event.preventDefault();
+
+            drop.textContent =
+                'Dropped successfully';
+
+        };
+
+    </script>
+
+</body>
+
+</html>

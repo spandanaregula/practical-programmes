@@ -1,0 +1,1 @@
+const fs=require('node:fs/promises');const path=require('node:path');async function run(){const file=path.join(__dirname,'sample.txt');await fs.writeFile(file,'Node file system example');console.log(await fs.readFile(file,'utf8'));await fs.unlink(file)}run().catch(console.error);

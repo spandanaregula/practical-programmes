@@ -1,0 +1,1 @@
+public class Ex50_Lcm { static int gcd(int a,int b){while(b!=0){int r=a%b;a=b;b=r;}return Math.abs(a);} public static void main(String[] args){int a=12,b=18;System.out.println(Math.abs(a*b)/gcd(a,b));} }

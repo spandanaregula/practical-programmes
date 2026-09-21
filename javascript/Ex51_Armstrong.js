@@ -1,0 +1,1 @@
+public class Ex51_Armstrong { public static void main(String[] args){int number=153,original=number,sum=0,digits=String.valueOf(number).length();while(number>0){sum+=(int)Math.pow(number%10,digits);number/=10;}System.out.println(sum==original);} }

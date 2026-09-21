@@ -1,0 +1,1 @@
+public class Ex09_NumberPalindrome { public static void main(String[] args){int number=1221,original=number,reversed=0;while(number>0){reversed=reversed*10+number%10;number/=10;}System.out.println(original==reversed); } }

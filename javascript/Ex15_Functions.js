@@ -1,0 +1,1 @@
+public class Ex15_Functions { static String greet(String name){return "Hello, "+name+"!";} static int add(int a,int b){return a+b;} public static void main(String[] args){System.out.println(greet("Student"));System.out.println(add(4,6));} }

@@ -1,0 +1,1 @@
+public class Ex62_StringPalindrome { public static void main(String[] args){String text="Never odd or even".replaceAll("[^A-Za-z0-9]","").toLowerCase();System.out.println(text.contentEquals(new StringBuilder(text).reverse()));} }

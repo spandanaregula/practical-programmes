@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Browser and Storage Lab</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #174EA6;
+        }
+
+        p.intro {
+            text-align: center;
+            color: #555;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #174EA6;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        pre {
+            background-color: #f1f5f9;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+        }
+
+        .home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .home a {
+            color: #174EA6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home a:hover {
+            color: #F4B400;
+            text-decoration: underline;
+        }
+
+        body.dark {
+            background-color: #202124;
+            color: white;
+        }
+
+        body.dark section {
+            background-color: #303134;
+        }
+
+        body.dark h2 {
+            color: #F4B400;
+        }
+
+        body.dark pre {
+            background-color: #202124;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Browser and Storage APIs</h1>
+
+    <p class="intro">
+        JavaScript Browser and Storage Practical Programs
+    </p>
+
+
+    <section>
+
+        <h2>1. Window, Navigator, Location and History</h2>
+
+        <button id="windowInfo">
+            Window info
+        </button>
+
+        <button id="navigatorInfo">
+            Navigator info
+        </button>
+
+        <button id="locationInfo">
+            Location info
+        </button>
+
+        <button id="back">
+            History back
+        </button>
+
+        <pre id="browserOutput"></pre>
+
+    </section>
+
+
+    <section>
+
+        <h2>2. Local Storage and Session Storage</h2>
+
+        <input
+            id="storageValue"
+            placeholder="Value">
+
+        <button id="saveLocal">
+            Save localStorage
+        </button>
+
+        <button id="saveSession">
+            Save sessionStorage
+        </button>
+
+        <button id="readStorage">
+            Read storage
+        </button>
+
+        <pre id="storageOutput"></pre>
+
+    </section>
+
+
+    <section>
+
+        <h2>3. Shopping Cart using localStorage</h2>
+
+        <button data-product="Notebook">
+            Add Notebook
+        </button>
+
+        <button data-product="Mug">
+            Add Mug
+        </button>
+
+        <button id="showCart">
+            Show cart
+        </button>
+
+        <pre id="cartOutput"></pre>
+
+    </section>
+
+
+    <section>
+
+        <h2>4. Theme Switcher</h2>
+
+        <button id="theme">
+            Toggle Light / Dark
+        </button>
+
+    </section>
+
+
+    <div class="home">
+
+        <a href="../index.html">
+            ← Back to JavaScript Programs
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Window information
+
+        windowInfo.onclick = () => {
+
+            browserOutput.textContent =
+                `Window: ${innerWidth} x ${innerHeight}`;
+
+        };
+
+
+        // Navigator information
+
+        navigatorInfo.onclick = () => {
+
+            browserOutput.textContent =
+                `Browser: ${navigator.userAgent}
+Language: ${navigator.language}`;
+
+        };
+
+
+        // Location information
+
+        locationInfo.onclick = () => {
+
+            browserOutput.textContent =
+                location.href;
+
+        };
+
+
+        // History
+
+        back.onclick = () => {
+
+            history.back();
+
+        };
+
+
+        // Local Storage
+
+        saveLocal.onclick = () => {
+
+            localStorage.setItem(
+                'labValue',
+                storageValue.value
+            );
+
+        };
+
+
+        // Session Storage
+
+        saveSession.onclick = () => {
+
+            sessionStorage.setItem(
+                'labValue',
+                storageValue.value
+            );
+
+        };
+
+
+        // Read Storage
+
+        readStorage.onclick = () => {
+
+            storageOutput.textContent =
+                `local: ${localStorage.getItem('labValue')}
+session: ${sessionStorage.getItem('labValue')}`;
+
+        };
+
+
+        // Shopping cart
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem('cart') || '[]'
+            );
+
+
+        document
+            .querySelectorAll('[data-product]')
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    cart.push(
+                        button.dataset.product
+                    );
+
+                    localStorage.setItem(
+                        'cart',
+                        JSON.stringify(cart)
+                    );
+
+                };
+
+            });
+
+
+        showCart.onclick = () => {
+
+            cartOutput.textContent =
+                cart.length
+                    ? cart.join(', ')
+                    : 'Cart is empty';
+
+        };
+
+
+        // Theme switcher
+
+        const savedTheme =
+            localStorage.getItem('theme');
+
+
+        if (savedTheme === 'dark') {
+
+            document.body.classList.add('dark');
+
+        }
+
+
+        theme.onclick = () => {
+
+            document.body.classList.toggle('dark');
+
+            localStorage.setItem(
+                'theme',
+                document.body.classList.contains('dark')
+                    ? 'dark'
+                    : 'light'
+            );
+
+        };
+
+    </script>
+
+</body>
+
+</html>

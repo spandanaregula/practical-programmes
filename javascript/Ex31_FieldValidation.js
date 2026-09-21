@@ -1,0 +1,2 @@
+import java.util.Scanner;
+public class Ex31_FieldValidation { public static void main(String[] args){try(Scanner input=new Scanner(System.in)){String name=input.nextLine(),email=input.nextLine(),phone=input.nextLine(),password=input.nextLine();boolean valid=!name.isBlank()&&email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")&&phone.matches("\\d{10}")&&password.length()>=8;System.out.println(valid?"All fields are valid.":"Check the entered fields.");}} }
